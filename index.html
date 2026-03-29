@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INVILA - Zero CAPeX Water Infrastructure</title>
+    <title>INVILA | Section 3: Strategic Asset Transfer</title>
     
-    <!-- Fonts: Noto Serif & Inter -->
+    <!-- Fonts: Noto Serif & Inter (Semua Weight) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Serif:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,7 +19,9 @@
                 extend: {
                     colors: {
                         royalBlue: '#2257d8',
+                        brandLight: '#60a5fa',
                         offWhite: '#f5f7fb',
+                        ink: '#0f172a',
                     },
                     fontFamily: {
                         serif: ['"Noto Serif"', 'serif'],
@@ -31,25 +33,39 @@
     </script>
 
     <style>
-        /* Tipografi Presisi Sesuai Permintaan Gambar */
+        :root {
+            --brand: #2257d8;
+            --brand-light: #60a5fa;
+            --brand-soft: rgba(34, 87, 216, 0.05);
+            --ink: #0f172a;
+            --muted: #64748b;
+            --bg: #ffffff;
+            --surface: #f8fafc;
+            --line: rgba(15, 23, 42, 0.08);
+            --success: #10b981;
+            --radius-xl: 40px;
+            --radius-lg: 24px;
+            --shadow: 0 20px 50px rgba(15, 23, 42, 0.05);
+            --max-width: 1100px;
+        }
+
+        /* --- BRANDING HEADER STYLES --- */
         .brand-text {
-            font-size: 55px; /* Standar 55pt */
+            font-size: 55px;
             line-height: 1;
             font-weight: 700;
         }
         .brand-tm {
-            font-size: 22px; /* Proporsional Superscript dari 55px */
+            font-size: 22px;
             vertical-align: super;
             margin-left: 2px;
         }
         .sub-brand-text {
-            font-size: 13px; /* Standar 13pt */
+            font-size: 13px;
             letter-spacing: 0.05em;
             line-height: 1.2;
             font-weight: 700;
         }
-        
-        /* Logo Height: 2x Tinggi Font Brand (2 * 55px = 110px) */
         .logo-container {
             height: 110px;
             display: flex;
@@ -60,67 +76,91 @@
             width: auto;
             object-fit: contain;
         }
-
-        /* Hanging Logo Effect: Logo melewati batas bawah header */
         .hanging-logo {
             transform: translateY(18px); 
             filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
             z-index: 60;
         }
-
         .header-scrolled {
             background-color: rgba(255, 255, 255, 0.98);
             box-shadow: 0 10px 30px -10px rgba(0,0,0,0.08);
             padding-top: 0.1rem;
             padding-bottom: 0.1rem;
         }
-
         .nav-link {
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 0.05em;
             color: #64748b;
             transition: all 0.3s;
-            white-space: nowrap;
         }
-        .nav-link:hover {
-            color: #2257d8;
-        }
+        .nav-link:hover { color: var(--brand); }
+        .divider { width: 1px; height: 14px; background-color: #e2e8f0; margin: 0 12px; }
 
-        .divider {
-            width: 1px;
-            height: 14px;
-            background-color: #e2e8f0;
-            margin: 0 12px;
+        /* --- BAB 3 CONTENT STYLES --- */
+        .section-solution { padding: 120px 0; }
+        .solution-header { text-align: center; margin-bottom: 80px; }
+        .kicker { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.25em; color: var(--brand); margin-bottom: 24px; display: block; }
+        .headline { font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.1; letter-spacing: -0.05em; font-weight: 900; margin: 0 auto 40px; max-width: 25ch; color: var(--ink); }
+        .headline span { color: var(--brand); display: block; }
+        .intro-copy { max-width: 850px; margin: 0 auto; font-size: 1.25rem; line-height: 1.8; color: var(--muted); }
+        .intro-copy strong { color: var(--ink); }
+
+        .commitment-card { background: var(--ink); color: #fff; padding: 80px 40px; border-radius: var(--radius-xl); text-align: center; position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.2); }
+        .skin-badge { background: var(--brand); font-size: 0.7rem; font-weight: 900; padding: 8px 20px; border-radius: 99px; text-transform: uppercase; letter-spacing: 0.2em; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); }
+        .commitment-title { font-family: 'Noto Serif', serif; font-size: 2rem; margin-bottom: 30px; font-style: italic; }
+        .commitment-text { font-size: 1.4rem; max-width: 900px; margin: 0 auto; line-height: 1.8; color: rgba(255,255,255,0.85); }
+        .commitment-text strong { color: #fff; border-bottom: 2px solid var(--brand); }
+
+        .pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin: 100px 0; }
+        .pillar-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 40px; transition: 0.3s; }
+        .pillar-card:hover { transform: translateY(-10px); box-shadow: var(--shadow); border-color: var(--brand); }
+        .pillar-label { color: var(--brand); font-weight: 800; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 15px; }
+        .pillar-card h3 { font-size: 1.5rem; font-weight: 900; margin: 0 0 20px; letter-spacing: -0.03em; }
+        .pillar-card p { font-size: 0.95rem; color: var(--muted); margin-bottom: 25px; }
+
+        .fail-statement { background: var(--surface); border: 2px dashed var(--brand); border-radius: var(--radius-xl); padding: 60px 40px; text-align: center; margin: 100px 0; }
+        .fail-text { font-family: 'Noto Serif', serif; font-size: 1.3rem; font-style: italic; color: #475569; max-width: 850px; margin: 0 auto; }
+
+        .dashboard-teaser { background: var(--ink); border-radius: var(--radius-xl); padding: 100px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; color: #fff; overflow: hidden; position: relative; }
+        .phone-frame { width: 320px; height: 640px; background: #000; border-radius: 50px; padding: 12px; border: 6px solid #1e293b; box-shadow: 0 50px 100px rgba(0,0,0,0.5); margin: 0 auto; }
+        .phone-screen { background: #0f172a; width: 100%; height: 100%; border-radius: 40px; overflow: hidden; padding: 15px 18px; display: flex; flex-direction: column; }
+        .live-tag { font-size: 0.55rem; background: rgba(16,185,129,0.1); color: var(--success); padding: 4px 10px; border-radius: 20px; display: flex; align-items: center; gap: 5px; font-weight: 800; }
+        .pulse { width: 5px; height: 5px; background: var(--success); border-radius: 50%; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(2.5); opacity: 0; } }
+        .db-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 14px; margin-bottom: 10px; }
+        .db-card label { display: block; font-size: 0.55rem; color: var(--muted); text-transform: uppercase; font-weight: 800; }
+        .db-card .val { font-size: 1.4rem; font-weight: 800; }
+
+        .summary-lock { padding: 120px 0; text-align: center; border-top: 1px solid var(--line); }
+        .lock-headline { font-size: 2.2rem; font-weight: 900; margin-bottom: 30px; color: var(--ink); letter-spacing: -0.04em; }
+        .lock-body { font-family: 'Noto Serif', serif; font-size: 1.35rem; line-height: 1.8; color: #475569; font-style: italic; max-width: 900px; margin: 0 auto; }
+        .lock-body strong { color: var(--brand); font-style: normal; font-weight: 800; }
+
+        @media (max-width: 1000px) {
+            .pillar-grid { grid-template-columns: 1fr; }
+            .dashboard-teaser { grid-template-columns: 1fr; text-align: center; }
         }
     </style>
 </head>
 <body class="bg-offWhite font-sans text-slate-900 overflow-x-hidden">
 
-    <!-- Header Section Only -->
+    <!-- HEADER SECTION -->
     <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 bg-white border-b border-slate-100 overflow-visible">
         <div class="max-w-[1440px] mx-auto px-4 md:px-8 overflow-visible">
             <nav class="flex justify-between items-center overflow-visible">
-                
-                <!-- Logo & Brand Identity Area -->
+                <!-- Logo & Brand Identity -->
                 <div class="flex items-center group cursor-pointer overflow-visible">
-                    <!-- Logo (Hanging Effect) -->
                     <div class="logo-container hanging-logo transition-transform duration-500 group-hover:scale-105">
                         <img src="logo-invila.png" alt="Logo INVILA" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                        <!-- Fallback SVG -->
                         <svg class="logo-img hidden" viewBox="0 0 100 125" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M50 5C50 5 12 48 12 80C12 101.5 29.5 118 50 118C70.5 118 88 101.5 88 80C88 48 50 5 50 5Z" fill="#2257d8"/>
-                            <path d="M35 85L50 70L65 85" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-
-                    <!-- Typography Section (Noto Serif) -->
                     <div class="ml-6 flex flex-col justify-center">
-                        <div class="flex items-start">
-                            <h1 class="font-serif brand-text text-slate-900 tracking-tight">
-                                INVILA<span class="brand-tm">TM</span>
-                            </h1>
-                        </div>
+                        <h1 class="font-serif brand-text text-slate-900 tracking-tight">
+                            INVILA<span class="brand-tm">TM</span>
+                        </h1>
                         <p class="font-serif sub-brand-text text-royalBlue uppercase">
                             ZERO CAPeX WATER INFRASTRUCTURE FOR INDUSTRY
                         </p>
@@ -140,14 +180,9 @@
                         <div class="divider"></div>
                         <a href="#" class="nav-link">MULAI ASESMEN</a>
                     </div>
-                    
                     <div class="flex items-center space-x-3">
-                        <button class="bg-white border border-slate-200 px-5 py-2.5 rounded-full text-[11px] font-bold text-slate-800 shadow-sm hover:border-royalBlue hover:text-royalBlue transition-all">
-                            HITUNG SAVINGS
-                        </button>
-                        <a href="https://wa.me/6285219493322" target="_blank" class="bg-royalBlue px-6 py-2.5 rounded-full text-[11px] font-bold text-white shadow-lg shadow-blue-200 hover:bg-[#1a44b0] transition-all flex items-center">
-                            CHAT WHATSAPP
-                        </a>
+                        <button class="bg-white border border-slate-200 px-5 py-2.5 rounded-full text-[11px] font-bold text-slate-800 shadow-sm hover:border-royalBlue hover:text-royalBlue transition-all">HITUNG SAVINGS</button>
+                        <a href="https://wa.me/6285219493322" target="_blank" class="bg-royalBlue px-6 py-2.5 rounded-full text-[11px] font-bold text-white shadow-lg shadow-blue-200 hover:bg-[#1a44b0] transition-all flex items-center">CHAT WHATSAPP</a>
                     </div>
                 </div>
 
@@ -159,27 +194,118 @@
         </div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-[60] hidden flex-col items-center justify-center space-y-8 p-6 transition-all duration-300">
+    <!-- MOBILE MENU OVERLAY -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-[70] hidden flex-col items-center justify-center space-y-8 p-6 transition-all duration-300">
         <button class="absolute top-8 right-8 text-slate-800" onclick="toggleMenu()">
             <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
-        <div class="flex flex-col items-center space-y-6">
-            <a href="#" class="text-xl font-bold text-slate-800">Kenapa Zero CAPeX</a>
-            <a href="#" class="text-xl font-bold text-slate-800">Solusi INVILA™</a>
-            <a href="#" class="text-xl font-bold text-slate-800">Cara Kerja</a>
-            <div class="h-px w-20 bg-slate-200 my-4"></div>
-            <a href="https://wa.me/6285219493322" class="bg-royalBlue text-white px-10 py-4 rounded-full font-bold shadow-xl">Chat WhatsApp</a>
-        </div>
+        <a href="#" class="text-xl font-bold text-slate-800">Kenapa Zero CAPeX</a>
+        <a href="#" class="text-xl font-bold text-slate-800">Solusi INVILA™</a>
+        <a href="#" class="text-xl font-bold text-slate-800">Cara Kerja</a>
+        <a href="https://wa.me/6285219493322" class="bg-royalBlue text-white px-10 py-4 rounded-full font-bold shadow-xl">Chat WhatsApp</a>
     </div>
 
-    <!-- Empty Main Content -->
-    <main class="min-h-screen pt-[260px]">
-        <!-- Halaman dikosongkan sesuai permintaan -->
+    <!-- MAIN CONTENT (BAB 3) -->
+    <main class="pt-[180px]">
+        <section class="section-solution">
+            <div class="max-w-[1100px] mx-auto px-6">
+                
+                <header class="solution-header">
+                    <span class="kicker">Dari Cost Center Menjadi Aset Strategis</span>
+                    <h2 class="headline">Utilitas Air Tidak Harus Terus Menjadi <span>Cost Center yang Menguras Laba</span></h2>
+                    <div class="intro-copy font-light">
+                        <p>Hentikan pengelolaan utilitas sebagai pusat biaya yang menguras laba. Melalui <strong>Water-as-a-Service</strong>, Invila™ mengambil alih seluruh beban investasi dan risiko operasional Anda—mengubah sistem air menjadi infrastruktur strategis yang lebih andal, terukur, dan siap mendukung akselerasi ekspansi bisnis Anda.</p>
+                    </div>
+                </header>
+
+                <div class="my-24">
+                    <article class="commitment-card">
+                        <span class="skin-badge">Skin in the Game</span>
+                        <h3 class="commitment-title">The Invila™ Commitment</h3>
+                        <p class="commitment-text">
+                            "Kami membangun di site Anda, kami berinvestasi pada masa depan Anda. Model bisnis kami hanya berjalan jika sistem kami berhasil. <strong>Kegagalan operasional adalah risiko investasi kami—bukan beban Anda.</strong>"
+                        </p>
+                    </article>
+                </div>
+
+                <div class="pillar-grid">
+                    <div class="pillar-card group">
+                        <span class="pillar-label">Pillar 01</span>
+                        <h3>Financial Sovereignty</h3>
+                        <p class="text-slate-500 text-sm">Pertahankan modal kerja Anda untuk ekspansi pasar, bukan untuk aset utilitas yang menyusut nilainya.</p>
+                        <ul class="space-y-3 mt-6">
+                            <li class="flex items-center text-xs font-bold text-ink"><span class="text-royalBlue mr-2">→</span> Zero Upfront Investment</li>
+                            <li class="flex items-center text-xs font-bold text-ink"><span class="text-royalBlue mr-2">→</span> Off-Balance Sheet Structure</li>
+                            <li class="flex items-center text-xs font-bold text-ink"><span class="text-royalBlue mr-2">→</span> Predictable OPEX Model</li>
+                        </ul>
+                    </div>
+                    <div class="pillar-card group">
+                        <span class="pillar-label">Pillar 02</span>
+                        <h3>Operational Accountability</h3>
+                        <p class="text-slate-500 text-sm">Kembalikan tim engineering Anda ke lini produksi utama. Biarkan kami memikul tanggung jawab teknis penuh.</p>
+                        <ul class="space-y-3 mt-6">
+                            <li class="flex items-center text-xs font-bold text-ink"><span class="text-royalBlue mr-2">→</span> Guaranteed Performance SLA</li>
+                            <li class="flex items-center text-xs font-bold text-ink"><span class="text-royalBlue mr-2">→</span> 24/7 Predictive Monitoring</li>
+                            <li class="flex items-center text-xs font-bold text-ink"><span class="text-royalBlue mr-2">→</span> Zero Internal Resource Drain</li>
+                        </ul>
+                    </div>
+                    <div class="pillar-card group">
+                        <span class="pillar-label">Pillar 03</span>
+                        <h3>Growth Scalability</h3>
+                        <p class="text-slate-500 text-sm">Jangan biarkan utilitas menjadi gembok ekspansi. Sistem kami tumbuh secepat visi perusahaan Anda.</p>
+                        <ul class="space-y-3 mt-6">
+                            <li class="flex items-center text-xs font-bold text-ink"><span class="text-royalBlue mr-2">→</span> Modular Instant Capacity</li>
+                            <li class="flex items-center text-xs font-bold text-ink"><span class="text-royalBlue mr-2">→</span> Future-Proof Compliance</li>
+                            <li class="flex items-center text-xs font-bold text-ink"><span class="text-royalBlue mr-2">→</span> Rapid Time-to-Market</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="fail-statement">
+                    <h3 class="text-2xl font-black mb-4 uppercase tracking-tight">Why We Don’t Fail</h3>
+                    <p class="fail-text leading-relaxed">
+                        "Kami mengelola sistem Anda dengan standar tertinggi karena hanya melalui performa yang sempurna, investasi modal kami di site Anda tetap terjaga. <strong>Keberhasilan operasional Anda adalah satu-satunya parameter profitabilitas kami.</strong>"
+                    </p>
+                </div>
+
+                <div class="dashboard-teaser">
+                    <div class="teaser-info px-4">
+                        <span class="kicker text-brandLight">Management Visibility</span>
+                        <h3 class="text-4xl font-black mb-6 leading-tight">Visibility is Control.</h3>
+                        <p class="text-slate-400 text-lg font-light leading-relaxed">Hancurkan 'Ilusi Kendali'. Pantau kualitas, flow rate, dan status alarm langsung dari ponsel Anda—kapan pun, di mana pun.</p>
+                    </div>
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <div class="flex justify-between text-[10px] font-bold opacity-50 mb-6"><span>15:10</span><span>📶 5G 🔋</span></div>
+                            <div class="mb-6"><span class="text-[10px] font-black text-brandLight uppercase tracking-widest block">Sunday</span><span class="text-xs opacity-50">March 29, 2026</span></div>
+                            <div class="flex justify-between items-center mb-6">
+                                <span class="text-[10px] font-black tracking-widest uppercase">INVILA™ SCADA</span>
+                                <div class="live-tag"><div class="pulse"></div> LIVE DATA</div>
+                            </div>
+                            <div class="db-card"><label>Production Flow Rate</label><div class="flex items-baseline"><span class="val">1,024</span><span class="text-[10px] opacity-50 ml-1">m³/day</span></div></div>
+                            <div class="db-card"><label>Cumulative Vol. (Month)</label><div class="flex items-baseline"><span class="val">32,768</span><span class="text-[10px] opacity-50 ml-1">m³</span></div></div>
+                            <div class="grid grid-cols-2 gap-2 mb-4">
+                                <div class="db-card"><label>Water pH</label><span class="val text-success">7.2</span></div>
+                                <div class="db-card"><label>Turbidity</label><span class="val">0.45</span></div>
+                            </div>
+                            <div class="mt-auto bg-royalBlue p-3 rounded-xl text-center text-[10px] font-black uppercase tracking-widest">✓ REGULATORY COMPLIANT</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-lock mt-32">
+                    <h3 class="lock-headline italic">Ubah Utilitas Anda Dari Beban Masa Lalu Menjadi Keunggulan Kompetitif Masa Depan.</h3>
+                    <p class="lock-body">
+                        "Memilih Invila™ bukan sekadar mengganti vendor air; ini adalah langkah strategis untuk membersihkan neraca keuangan Anda dari risiko aset yang menyusut dan membebaskan tim terbaik Anda untuk kembali fokus pada profitabilitas. Kami mengambil alih beban investasi, kami menjamin performa operasional, dan kami mengamankan ruang ekspansi Anda. Dengan Invila™, utilitas air Anda bukan lagi soal biaya yang harus ditekan, melainkan <strong>fondasi kokoh yang siap mendukung setiap lompatan besar perusahaan Anda.</strong>"
+                    </p>
+                </div>
+
+            </div>
+        </section>
     </main>
 
     <script>
-        // Header Scroll Effect
+        // Header Scroll Interaction
         window.addEventListener('scroll', function() {
             const header = document.getElementById('main-header');
             if (window.scrollY > 40) {
@@ -189,10 +315,9 @@
             }
         });
 
-        // Mobile Menu Toggle
+        // Mobile Navigation Toggle
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            if (!menu) return;
             if (menu.classList.contains('hidden')) {
                 menu.classList.remove('hidden');
                 menu.classList.add('flex');
@@ -204,6 +329,5 @@
             }
         }
     </script>
-
 </body>
 </html>
