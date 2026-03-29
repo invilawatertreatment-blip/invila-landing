@@ -1,710 +1,211 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover" />
-  <title>Invila™ | Premium B2B Industrial Preview</title>
-  <meta name="description" content="Single-file premium B2B industrial landing page preview untuk Invila™." />
-  <style>
-    :root {
-      --bg: #eef3fb;
-      --bg-2: #f8fbff;
-      --surface: rgba(255,255,255,0.9);
-      --surface-strong: rgba(255,255,255,0.96);
-      --line: rgba(17,24,39,0.08);
-      --ink: #0f172a;
-      --muted: #637083;
-      --brand: #2357d8;
-      --brand-2: #4d77e5;
-      --shadow: 0 18px 48px rgba(15,23,42,0.08);
-      --shadow-soft: 0 10px 24px rgba(15,23,42,0.06);
-      --pill: 999px;
-      --radius-xl: 30px;
-      --radius-lg: 22px;
-      --max: 1220px;
-    }
+import React, { useState, useEffect } from 'react';
+import { MessageCircle, Calculator, Menu, X } from 'lucide-react';
 
-    * { box-sizing: border-box; }
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
-    }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 10% 10%, rgba(35,87,216,0.08), transparent 20%),
-        radial-gradient(circle at 90% 0%, rgba(148,163,184,0.1), transparent 24%),
-        linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-    }
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-    .wrap {
-      width: min(calc(100% - 56px), var(--max));
-      margin: 0 auto;
-    }
+  // Efek shadow dan perubahan tinggi saat scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-    .brand-wordmark,
-    .brand-tagline {
-      font-family: "Noto Serif", Georgia, "Times New Roman", serif;
-    }
+  return (
+    <div className="min-h-screen bg-[#f5f7fb] font-['Inter'] text-slate-800">
+      {/* Import Fonts via Style Tag */}
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif:wght@700&display=swap');
+          .font-serif-brand { font-family: 'Noto Serif', serif; }
+        `}
+      </style>
 
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255,255,255,0.84);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(17,24,39,0.06);
-    }
-    .header-row {
-      min-height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
-    }
+      {/* Navigation Header - Fixed position with dynamic styles */}
+      <header 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? 'bg-white shadow-lg py-2' : 'bg-white/90 backdrop-blur-md py-4'
+        }`}
+      >
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 md:h-20">
+            
+            {/* Logo Section - Overflows the header visually */}
+            <div className="flex items-center relative z-50">
+              <div className="flex items-center group cursor-pointer">
+                {/* Custom SVG Logo (Water drop + Tech elements) */}
+                <div className="relative -mt-2 md:-mt-6 transition-transform duration-300 group-hover:scale-105">
+                  <svg width="65" height="85" viewBox="0 0 100 125" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-2xl">
+                    <path d="M50 0C50 0 10 40 10 70C10 92.0914 27.9086 110 50 110C72.0914 110 90 92.0914 90 70C90 40 50 0 50 0Z" fill="#2257d8"/>
+                    {/* IoT/Tech connections paths */}
+                    <path d="M35 85L50 70L65 85" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="35" cy="85" r="6" fill="white"/>
+                    <circle cx="65" cy="85" r="6" fill="white"/>
+                    <circle cx="50" cy="70" r="6" fill="white"/>
+                    <path d="M25 65L45 45" stroke="white" strokeWidth="4" strokeLinecap="round" opacity="0.4"/>
+                  </svg>
+                </div>
+                
+                {/* Brand Identity with Noto Serif */}
+                <div className="ml-4 flex flex-col">
+                  <span className="font-serif-brand text-2xl md:text-3xl tracking-tight leading-none text-slate-900">
+                    INVILA<span className="text-[10px] align-top font-sans ml-0.5">TM</span>
+                  </span>
+                  <span className="text-[8px] md:text-[9px] font-bold tracking-[0.25em] text-[#2257d8] mt-1.5 leading-tight uppercase">
+                    Zero CapEx Water Infrastructure<br/>For Industry
+                  </span>
+                </div>
+              </div>
+            </div>
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      min-width: 0;
-      flex: 0 1 auto;
-    }
-    .logo-chip {
-      width: 72px;
-      height: 72px;
-      border-radius: 20px;
-      flex: 0 0 auto;
-      display: grid;
-      place-items: center;
-      background: linear-gradient(180deg, #2f6af0, #0b4ed8 62%, #0b2f86 100%);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.26), 0 10px 24px rgba(35,87,216,0.22);
-      position: relative;
-      overflow: hidden;
-    }
-    .logo-chip::before {
-      content: "";
-      position: absolute;
-      inset: 8px 10px auto auto;
-      width: 18px;
-      height: 42px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.08));
-      transform: rotate(-24deg);
-    }
-    .logo-chip svg {
-      width: 58px;
-      height: 58px;
-      position: relative;
-      z-index: 1;
-    }
-    .brand-lockup {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-      min-width: 0;
-      line-height: 1;
-    }
-    .brand-wordmark {
-      margin: 0;
-      font-size: clamp(2.2rem, 4vw, 3.6rem);
-      line-height: 0.92;
-      letter-spacing: -0.06em;
-      text-transform: uppercase;
-      color: #0b1020;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .brand-wordmark sup {
-      font-size: 0.42em;
-      vertical-align: super;
-      position: relative;
-      top: -0.08em;
-      margin-left: 0.05em;
-    }
-    .brand-tagline {
-      margin: 0;
-      font-size: clamp(0.78rem, 1vw, 0.98rem);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      color: var(--brand);
-      white-space: nowrap;
-    }
+            {/* Desktop Navigation Links */}
+            <div className="hidden lg:flex items-center space-x-1">
+              <div className="flex items-center border-r border-slate-200 pr-4 mr-4">
+                <NavLink href="#">KENAPA ZERO CAPEX</NavLink>
+                <div className="w-px h-3 bg-slate-300 mx-2"></div>
+                <NavLink href="#">SOLUSI INVILA™</NavLink>
+                <div className="w-px h-3 bg-slate-300 mx-2"></div>
+                <NavLink href="#">CARA KERJA</NavLink>
+                <div className="w-px h-3 bg-slate-300 mx-2"></div>
+                <NavLink href="#">DAMPAK BISNIS</NavLink>
+                <div className="w-px h-3 bg-slate-300 mx-2"></div>
+                <NavLink href="#">MULAI ASESMEN</NavLink>
+              </div>
 
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      justify-content: center;
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-    .nav a {
-      padding: 10px 8px;
-      font-size: 0.66rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: #5f6b7a;
-      white-space: nowrap;
-      border-radius: var(--pill);
-      transition: 180ms ease;
-    }
-    .nav a:hover {
-      background: rgba(35,87,216,0.08);
-      color: var(--brand);
-    }
-    .nav a + a::before {
-      content: "|";
-      color: #cbd5e1;
-      margin-right: 8px;
-    }
+              {/* Call to Actions (CTAs) */}
+              <div className="flex items-center space-x-3">
+                <button className="flex items-center px-5 py-2.5 bg-white border border-slate-200 text-slate-900 font-bold text-[11px] rounded-[30px] shadow-sm hover:shadow-md hover:border-slate-300 transition-all">
+                  <Calculator size={14} className="mr-2 text-[#2257d8]" />
+                  HITUNG SAVINGS
+                </button>
+                <button className="flex items-center px-5 py-2.5 bg-[#2257d8] text-white font-bold text-[11px] rounded-[30px] shadow-lg shadow-blue-200 hover:bg-[#1a44b0] hover:-translate-y-0.5 transition-all">
+                  <MessageCircle size={14} className="mr-2" />
+                  CHAT WHATSAPP
+                </button>
+              </div>
+            </div>
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex: 0 0 auto;
-    }
-    .btn {
-      min-height: 46px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 18px;
-      border-radius: var(--pill);
-      border: 1px solid transparent;
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      white-space: nowrap;
-      box-shadow: var(--shadow-soft);
-    }
-    .btn-secondary {
-      background: rgba(255,255,255,0.94);
-      border-color: var(--line);
-      color: var(--ink);
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      color: #fff;
-      box-shadow: 0 18px 36px rgba(35,87,216,0.2);
-    }
-    .menu-toggle {
-      display: none;
-      width: 42px;
-      height: 42px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.96);
-      padding: 0;
-    }
-    .menu-toggle::before,
-    .menu-toggle::after,
-    .menu-toggle span {
-      content: "";
-      display: block;
-      width: 18px;
-      height: 2px;
-      background: var(--ink);
-      margin: 5px auto;
-    }
-    .mobile-nav { display: none; padding-bottom: 14px; }
-    .mobile-card {
-      display: grid;
-      gap: 10px;
-      padding: 14px;
-      border-radius: 18px;
-      background: var(--surface-strong);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow-soft);
-    }
-    .mobile-card a {
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: #f8fafc;
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: #5f6b7a;
-    }
-    .mobile-card a:first-child {
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      color: #fff;
-    }
-    .mobile-card a:nth-child(2) {
-      background: rgba(35,87,216,0.08);
-      color: var(--brand);
-    }
-
-    .hero {
-      padding: 34px 0 62px;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 420px) minmax(0, 520px);
-      justify-content: space-between;
-      gap: 38px;
-      align-items: start;
-    }
-    .hero-copy {
-      display: grid;
-      gap: 18px;
-      align-content: start;
-      min-height: 100%;
-    }
-    .hero-copy-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      width: fit-content;
-      min-height: 42px;
-      padding: 0 16px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.86);
-      border: 1px solid rgba(17,24,39,0.07);
-      box-shadow: var(--shadow-soft);
-      color: var(--brand);
-      font-size: 0.68rem;
-      font-weight: 900;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-    .hero-copy-badge::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--brand);
-      box-shadow: 0 0 0 6px rgba(35,87,216,0.1);
-    }
-    .hero-title {
-      margin: 0;
-      font-size: clamp(2.4rem, 4.2vw, 4.4rem);
-      line-height: 0.96;
-      letter-spacing: -0.07em;
-      color: var(--ink);
-      max-width: 10ch;
-      font-weight: 900;
-    }
-    .hero-title span {
-      display: block;
-      color: var(--brand);
-      margin-top: 0.14em;
-    }
-    .hero-text {
-      margin: 0;
-      max-width: 34rem;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.82;
-    }
-
-    .media-card {
-      padding: 18px;
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.9));
-    }
-    .media-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 12px;
-      padding: 2px 2px 0;
-    }
-    .media-label,
-    .media-side-label {
-      font-size: 0.68rem;
-      font-weight: 900;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-    }
-    .media-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--brand);
-    }
-    .media-label::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--brand);
-      box-shadow: 0 0 0 6px rgba(35,87,216,0.1);
-    }
-    .media-side-label {
-      color: #677386;
-    }
-    .media-window {
-      position: relative;
-      overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid rgba(17,24,39,0.08);
-      min-height: 430px;
-      background:
-        linear-gradient(140deg, rgba(8,16,33,0.24), rgba(8,16,33,0.02)),
-        linear-gradient(90deg, rgba(24,43,38,0.75) 0%, rgba(115,132,127,0.28) 28%, rgba(224,228,226,0.9) 74%, rgba(203,208,206,0.96) 100%);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18);
-    }
-    .water-lane {
-      position: absolute;
-      left: 4%;
-      top: 3%;
-      bottom: 3%;
-      width: 58%;
-      border-radius: 18px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.48), rgba(255,255,255,0.04) 18%, rgba(255,255,255,0) 100%),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.14) 0 1px, transparent 1px 30px),
-        linear-gradient(180deg, rgba(30,41,59,0.25), rgba(30,41,59,0.02) 20%, rgba(255,255,255,0) 100%),
-        linear-gradient(180deg, #d8f2f3 0%, #b6dde1 32%, #90bcc4 100%);
-      overflow: hidden;
-      transform: perspective(900px) rotateY(16deg);
-      transform-origin: left center;
-      border: 1px solid rgba(17,24,39,0.08);
-    }
-    .water-lane::before,
-    .water-lane::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-repeat: repeat;
-      opacity: 0.78;
-      animation: flow 11s linear infinite;
-    }
-    .water-lane::before {
-      background-image: radial-gradient(circle at 14px 8px, rgba(255,255,255,0.65) 0 3px, transparent 3px), radial-gradient(circle at 30px 20px, rgba(255,255,255,0.46) 0 3px, transparent 3px), radial-gradient(circle at 50px 12px, rgba(255,255,255,0.5) 0 2px, transparent 2px);
-      background-size: 70px 28px;
-    }
-    .water-lane::after {
-      background-image: linear-gradient(180deg, rgba(255,255,255,0.28), rgba(255,255,255,0) 60%);
-      mix-blend-mode: screen;
-      animation-duration: 14s;
-    }
-    @keyframes flow {
-      from { background-position: 0 0; }
-      to { background-position: 0 160px; }
-    }
-    .teeth {
-      position: absolute;
-      left: 3%;
-      top: 4%;
-      width: 64%;
-      height: 34px;
-      background: repeating-linear-gradient(90deg, rgba(20,20,20,0.92) 0 8px, rgba(20,20,20,0.18) 8px 12px);
-      clip-path: polygon(0 100%, 2% 0, 4% 100%, 6% 0, 8% 100%, 10% 0, 12% 100%, 14% 0, 16% 100%, 18% 0, 20% 100%, 22% 0, 24% 100%, 26% 0, 28% 100%, 30% 0, 32% 100%, 34% 0, 36% 100%, 38% 0, 40% 100%, 42% 0, 44% 100%, 46% 0, 48% 100%, 50% 0, 52% 100%, 54% 0, 56% 100%, 58% 0, 60% 100%, 62% 0, 64% 100%, 66% 0, 68% 100%, 70% 0, 72% 100%, 74% 0, 76% 100%, 78% 0, 80% 100%, 82% 0, 84% 100%, 86% 0, 88% 100%, 90% 0, 92% 100%, 94% 0, 96% 100%, 98% 0, 100% 100%);
-      opacity: 0.95;
-    }
-    .concrete-lane {
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 42%;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.34), rgba(255,255,255,0) 20%),
-        repeating-linear-gradient(180deg, rgba(120,120,120,0.15) 0 1px, transparent 1px 18px),
-        linear-gradient(180deg, #eceeee 0%, #dbdedd 60%, #cfd3d2 100%);
-      border-left: 1px solid rgba(17,24,39,0.08);
-    }
-    .concrete-lane::before {
-      content: "invila invila invila invila invila invila invila invila";
-      position: absolute;
-      left: 18px;
-      top: 42px;
-      right: 18px;
-      bottom: 24px;
-      color: rgba(64,72,82,0.2);
-      font-size: 1.25rem;
-      line-height: 2.35;
-      letter-spacing: 0.14em;
-      text-transform: lowercase;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      font-family: Georgia, "Times New Roman", serif;
-    }
-    .media-executive-overlay {
-      position: absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 16px;
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(9,16,32,0.08), rgba(9,16,32,0.68));
-      color: #fff;
-      backdrop-filter: blur(4px);
-      box-shadow: 0 16px 36px rgba(15,23,42,0.14);
-      max-width: 368px;
-    }
-    .media-executive-overlay small {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 0.62rem;
-      font-weight: 900;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.74);
-    }
-    .media-executive-overlay strong {
-      display: block;
-      font-size: 0.99rem;
-      line-height: 1.34;
-      letter-spacing: -0.02em;
-      font-weight: 700;
-    }
-
-    .note {
-      padding: 0 0 54px;
-    }
-    .note-card {
-      padding: 24px 26px;
-      border-radius: 24px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.76);
-      box-shadow: var(--shadow-soft);
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.76;
-    }
-
-    @media (max-width: 1080px) {
-      .nav,
-      .header-actions .btn {
-        display: none;
-      }
-      .menu-toggle {
-        display: inline-block;
-      }
-      .mobile-nav.show {
-        display: block;
-      }
-      .hero-grid {
-        grid-template-columns: 1fr;
-        justify-content: stretch;
-      }
-      .hero-title {
-        max-width: 11ch;
-      }
-      .media-card {
-        max-width: 760px;
-      }
-    }
-
-    @media (max-width: 780px) {
-      .wrap {
-        width: calc(100% - 12px);
-        max-width: none;
-      }
-      .site-header .wrap {
-        width: calc(100% - 8px);
-      }
-      .site-header {
-        background: rgba(255,255,255,0.96);
-      }
-      .header-row {
-        min-height: 68px;
-        gap: 8px;
-      }
-      .brand {
-        gap: 8px;
-        min-width: 0;
-        flex: 1 1 auto;
-      }
-      .logo-chip {
-        width: 46px;
-        height: 46px;
-        border-radius: 14px;
-      }
-      .logo-chip svg {
-        width: 36px;
-        height: 36px;
-      }
-      .brand-lockup {
-        gap: 2px;
-      }
-      .brand-wordmark {
-        font-size: 1.45rem;
-        line-height: 0.95;
-      }
-      .brand-tagline {
-        font-size: 0.54rem;
-        line-height: 1.1;
-        letter-spacing: 0.01em;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .menu-toggle {
-        width: 40px;
-        height: 40px;
-        flex: 0 0 auto;
-      }
-
-      .hero {
-        padding: 14px 0 42px;
-      }
-      .hero-grid {
-        gap: 18px;
-      }
-      .hero-copy {
-        gap: 14px;
-      }
-      .hero-copy-badge {
-        min-height: 38px;
-        padding: 0 14px;
-        font-size: 0.6rem;
-      }
-      .hero-title {
-        font-size: 2rem;
-        line-height: 1.02;
-        max-width: 100%;
-      }
-      .hero-text {
-        font-size: 0.92rem;
-        line-height: 1.62;
-      }
-      .media-card {
-        padding: 12px;
-        border-radius: 18px;
-      }
-      .media-top {
-        margin-bottom: 10px;
-      }
-      .media-label,
-      .media-side-label {
-        font-size: 0.6rem;
-      }
-      .media-window {
-        min-height: 320px;
-      }
-      .media-executive-overlay {
-        left: 8px;
-        right: 8px;
-        bottom: 8px;
-        padding: 10px 11px;
-        border-radius: 14px;
-        max-width: calc(100% - 16px);
-      }
-      .media-executive-overlay strong {
-        font-size: 0.84rem;
-        line-height: 1.32;
-      }
-      .note {
-        padding-bottom: 40px;
-      }
-      .note-card {
-        padding: 18px;
-        border-radius: 18px;
-        font-size: 0.9rem;
-        line-height: 1.62;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header class="site-header" id="siteHeader">
-    <div class="wrap">
-      <div class="header-row">
-        <a class="brand" href="#top" aria-label="Invila home">
-          <div class="logo-chip" aria-hidden="true">
-            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M13 50L25 38M25 38L36 27M25 38L13 31M25 38L31 44" stroke="white" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="12.5" cy="50.5" r="7" fill="none" stroke="white" stroke-width="5.5"/>
-              <circle cx="12.5" cy="30.5" r="7" fill="none" stroke="white" stroke-width="5.5"/>
-              <circle cx="36.5" cy="26.5" r="7" fill="none" stroke="white" stroke-width="5.5"/>
-              <circle cx="31.5" cy="44.5" r="7" fill="none" stroke="white" stroke-width="5.5"/>
-            </svg>
+            {/* Mobile Menu Trigger */}
+            <div className="lg:hidden flex items-center">
+              <button 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="p-2 text-slate-600 hover:text-[#2257d8] transition-colors"
+              >
+                {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
           </div>
-          <div class="brand-lockup">
-            <p class="brand-wordmark">Invila<sup>™</sup></p>
-            <p class="brand-tagline">Zero Capex Water Infrastructure for Industry</p>
-          </div>
-        </a>
-
-        <nav class="nav" aria-label="Primary">
-          <a href="#">Kenapa Zero Capex</a>
-          <a href="#">Solusi Invila™</a>
-          <a href="#">Cara Kerja</a>
-          <a href="#">Dampak Bisnis</a>
-          <a href="#">Mulai Assessment</a>
         </nav>
+      </header>
 
-        <div class="header-actions">
-          <a class="btn btn-secondary" href="#">Hitung Savings</a>
-          <a class="btn btn-primary" href="#">Chat WhatsApp</a>
-          <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><span></span></button>
-        </div>
-      </div>
-
-      <div class="mobile-nav" id="mobileNav">
-        <div class="mobile-card">
-          <a href="#">Chat WhatsApp</a>
-          <a href="#">Hitung Savings</a>
-          <a href="#">Kenapa Zero Capex</a>
-          <a href="#">Solusi Invila™</a>
-          <a href="#">Cara Kerja</a>
-          <a href="#">Dampak Bisnis</a>
-          <a href="#">Mulai Assessment</a>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main id="top">
-    <section class="hero">
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <div class="hero-copy-badge">Premium B2B Industrial Preview</div>
-          <h1 class="hero-title">Header Executive yang Stabil. <span>Visual Proof yang Meyakinkan.</span></h1>
-          <p class="hero-text">Versi ini hanya menyisakan struktur header dan area visual proof utama, lalu dibungkus ulang menjadi landing page premium B2B industrial yang bersih, rapi, dan siap dipreview langsung di browser dalam satu file HTML tunggal.</p>
-        </div>
-
-        <div class="media-card">
-          <div class="media-top">
-            <div class="media-label">Industrial Proof</div>
-            <div class="media-side-label">Facility &amp; Monitoring</div>
-          </div>
-          <div class="media-window" aria-label="Industrial proof visual">
-            <div class="teeth" aria-hidden="true"></div>
-            <div class="water-lane" aria-hidden="true"></div>
-            <div class="concrete-lane" aria-hidden="true"></div>
-            <div class="media-executive-overlay">
-              <small>Operational Snapshot</small>
-              <strong>Fasilitas yang rapi, sistem yang modern, dan visibilitas yang mendukung keputusan operasional.</strong>
+      {/* Mobile Menu Sidebar Overlay */}
+      {isMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-40 bg-white pt-24 px-6 animate-in fade-in duration-300">
+          <div className="flex flex-col space-y-6">
+            <MobileNavLink href="#">KENAPA ZERO CAPEX</MobileNavLink>
+            <MobileNavLink href="#">SOLUSI INVILA™</MobileNavLink>
+            <MobileNavLink href="#">CARA KERJA</MobileNavLink>
+            <MobileNavLink href="#">DAMPAK BISNIS</MobileNavLink>
+            <MobileNavLink href="#">MULAI ASESMEN</MobileNavLink>
+            
+            <div className="pt-8 space-y-4">
+              <button className="w-full flex justify-center items-center px-6 py-4 bg-white border border-slate-200 text-slate-900 font-bold rounded-[20px] shadow-sm">
+                <Calculator size={20} className="mr-3 text-[#2257d8]" />
+                HITUNG SAVINGS
+              </button>
+              <button className="w-full flex justify-center items-center px-6 py-4 bg-[#2257d8] text-white font-bold rounded-[20px] shadow-lg">
+                <MessageCircle size={20} className="mr-3" />
+                CHAT WHATSAPP
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      )}
 
-    <section class="note">
-      <div class="wrap">
-        <div class="note-card">
-          File ini sudah dibuat sebagai <strong>single HTML file</strong> dengan seluruh style berada di dalam dokumen yang sama. Tidak ada dependensi CSS atau JS terpisah, sehingga bisa langsung dibuka dan dipreview di browser.
+      {/* Content Section (Visual Mockup) */}
+      <main className="pt-40 pb-24 px-4 relative overflow-hidden">
+        {/* Subtle Background Pattern */}
+        <div className="absolute top-0 right-0 -z-10 opacity-5">
+           <svg width="400" height="400" viewBox="0 0 100 100">
+             <circle cx="50" cy="50" r="40" stroke="#2257d8" strokeWidth="0.5" fill="none" />
+             <path d="M10 50H90 M50 10V90" stroke="#2257d8" strokeWidth="0.2" />
+           </svg>
         </div>
-      </div>
-    </section>
-  </main>
 
-  <script>
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileNav = document.getElementById('mobileNav');
-    menuToggle?.addEventListener('click', () => {
-      menuToggle.classList.toggle('open');
-      mobileNav.classList.toggle('show');
-    });
-  </script>
-</body>
-</html>
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="inline-flex items-center px-4 py-1.5 bg-blue-50 text-[#2257d8] text-[10px] font-extrabold tracking-[0.2em] uppercase rounded-full mb-8 border border-blue-100">
+            Water-as-a-Service (WaaS)
+          </div>
+          
+          <h1 className="font-serif-brand text-4xl md:text-7xl text-slate-900 leading-[1.1] mb-10">
+            Infrastruktur Air Canggih <br className="hidden md:block" /> 
+            Tanpa Biaya Investasi.
+          </h1>
+          
+          <p className="text-slate-500 text-lg md:text-2xl max-w-3xl mx-auto leading-relaxed mb-16 font-light">
+            Kami menghadirkan teknologi IoT untuk pengolahan air industri Anda. 
+            Mulai dari konstruksi hingga operasional, kami tanggung semuanya. 
+            <span className="font-semibold text-slate-800"> Anda hanya membayar air yang Anda gunakan.</span>
+          </p>
+          
+          {/* Key Value Propositions with Soft Geometry */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <StatCard 
+              icon={<div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-[#2257d8] mb-4"><Calculator size={20}/></div>}
+              title="Savings Modal" 
+              value="100%" 
+              desc="Nol pengeluaran CapEx untuk pembangunan sistem baru." 
+            />
+            <StatCard 
+              icon={<div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-[#2257d8] mb-4"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg></div>}
+              title="Efisiensi Air" 
+              value="95%" 
+              desc="Teknologi sirkular tercanggih untuk pemulihan air limbah." 
+            />
+            <StatCard 
+              icon={<div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-[#2257d8] mb-4"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>}
+              title="Monitoring IoT" 
+              value="Real-Time" 
+              desc="Pantau kualitas dan kuantitas air 24/7 lewat dashboard." 
+            />
+          </div>
+        </div>
+      </main>
+    </div>
+  );
+};
+
+// NavLink Component for Desktop
+const NavLink = ({ href, children }) => (
+  <a 
+    href={href} 
+    className="text-[10px] font-bold text-slate-500 hover:text-[#2257d8] tracking-widest transition-all px-2 py-1 whitespace-nowrap"
+  >
+    {children}
+  </a>
+);
+
+// NavLink Component for Mobile
+const MobileNavLink = ({ href, children }) => (
+  <a 
+    href={href} 
+    className="text-xl font-bold text-slate-900 border-b border-slate-100 pb-3 hover:text-[#2257d8] transition-colors"
+  >
+    {children}
+  </a>
+);
+
+// Statistics Card with "Soft Geometry" (Rounded 30px)
+const StatCard = ({ icon, title, value, desc }) => (
+  <div className="bg-white p-10 rounded-[40px] shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-left">
+    {icon}
+    <span className="text-[#2257d8] text-[10px] font-extrabold uppercase tracking-widest mb-2 block">{title}</span>
+    <span className="text-4xl font-serif-brand text-slate-900 mb-3 block">{value}</span>
+    <p className="text-slate-500 text-sm leading-relaxed">{desc}</p>
+  </div>
+);
+
+export default App;
